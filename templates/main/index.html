@@ -1,9 +1,30 @@
-{% extends '_base.html' %}
+{% extends '_base.html' %} 
 
-{% block title %}Home{% endblock title %}
+{% block title %}Home{% endblock title %} 
 
 {% block content %}
 
-<h1>Hello World</h1>
+<pre class="line-numbers" style="margin-bottom: 30px;">
+    <code class="language-python">
+        if age == 18:
+            print('You can drink beer')
+        else:
+            print('Grow up boy')
+    </code>
+</pre>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="mb-3">
+        <textarea class="form-control" placeholder="Add AI to write code for you..." rows="3"></textarea>
+    </div>
+    <select class="form-select" aria-label="Default select example">
+        <option selected>Select Programming Language</option>
+        {% for lang in lang_list %}
+            <option value={{ lang }}>{{ lang|upper }}</option>
+        {% endfor %}
+    </select>
+    <button class="btn btn-secondary" style="margin-top: 20px;" type="submit">Submit</button>
+</form>
 
 {% endblock content %}
