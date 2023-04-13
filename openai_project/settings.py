@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", False)
+DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
@@ -67,7 +67,7 @@ WSGI_APPLICATION = "openai_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {{"default": env.dj_db_url("DATABASE_URL")}}
+DATABASES = {"default": env.dj_db_url("DATABASE_URL", default="sqlite:///db.sqlite3")}
 
 
 # Password validation
