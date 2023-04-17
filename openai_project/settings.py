@@ -1,6 +1,7 @@
 from pathlib import Path
 from environs import Env
 
+
 env = Env()
 env.read_env()
 
@@ -111,3 +112,6 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Open AI API Key
+API_KEY = env.str("API_KEY")
