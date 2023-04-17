@@ -1,5 +1,5 @@
 {% extends '_base.html' %} 
-{% block title %}Home{% endblock title %} 
+{% block title %}Suggest{% endblock title %} 
 
 {% block content %} 
 
@@ -24,13 +24,13 @@
 
 {% endif %}
 
-<form method="POST" action="{% url 'index'%}">
+<form method="POST" action="{% url 'suggest'%}">
     {% csrf_token %}
     <div class="mb-3">
     <textarea
         name="code"
         class="form-control"
-        placeholder="Tell AI to fix code for you..."
+        placeholder="Tell AI to suggest code for you..."
         rows="3"
     ></textarea>
     </div>
