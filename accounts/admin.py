@@ -39,6 +39,15 @@ class UserAdmin(BaseUserAdmin):
     )
     readonly_fields = ["last_login"]
     ordering = ["id"]
+    actions = ("make_users_active",)
+
+    # Action to make users active
+    # @admin.action(description="Mark selected users as active")
+    def make_users_active(self, request, queryset):
+        count = queryset.update(is_active=True)
+        self.message_user(request, f"{count} users have been made active successfully!")
+
+    make_users_active.short_description = "Mark selected users as active"
 
 
 admin.site.register(User, UserAdmin)
