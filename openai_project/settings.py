@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Local
+    "accounts.apps.AccountsConfig",
     "main.apps.MainConfig",
 ]
 
@@ -115,3 +116,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Open AI API Key
 API_KEY = env.str("API_KEY")
+
+# Custom User Model
+AUTH_USER_MODEL = "accounts.User"
