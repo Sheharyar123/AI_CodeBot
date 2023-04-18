@@ -14,20 +14,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        {% if 'suggest' in request.path %}
-          <li class="nav-item active">
-        {% else %}
-          <li class="nav-item">
-        {% endif %}
+        <li {% if 'suggest' in request.path %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
           <a class="nav-link" href="{% url 'suggest' %}">Suggest</a>
         </li>
-        {% if 'past' in request.path %}
-          <li class="nav-item active">
-        {% else %}
-          <li class="nav-item">
-        {% endif %}
+        <li {% if 'past' in request.path %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
           <a class="nav-link" href="#">Past</a>
         </li>
+        {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+        {% else %}
+          <li {% if 'login' in request.path %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+            <a class="nav-link" href="#">Login</a>
+          </li>
+          <li {% if 'signup' in request.path %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+            <a class="nav-link" href="#">Sign up</a>
+          </li>
+        {% endif %}  
       </ul>
     </div>
   </div>
