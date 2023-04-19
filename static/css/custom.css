@@ -2,3 +2,22 @@
 .form-control {
     border: 1px solid #9da9b5
 }
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+
+.social-btn {
+    width: 100%;
+    border: 1px solid #9da9b5;
+    transition: all 250ms ease-in-out;
+}
+
+.social-btn:hover {
+    border: 1px solid #9da9d5;
+    opacity: 0.9;
+}

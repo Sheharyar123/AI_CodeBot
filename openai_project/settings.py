@@ -129,6 +129,7 @@ AUTH_USER_MODEL = "accounts.User"
 
 # Django Allauth
 AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 SITE_ID = 1
@@ -138,5 +139,13 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 LOGIN_REDIRECT_URL = "index"
 ACCOUNT_LOGOUT_REDIRECT = "index"
+ACCOUNT_LOGOUT_ON_GET = True
+
+# Custom Django Allauth Forms
+ACCOUNT_FORMS = {
+    "login": "accounts.forms.CustomLoginForm",
+    "signup": "accounts.forms.CustomSignupForm",
+}
