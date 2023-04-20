@@ -18,7 +18,7 @@
           <a class="nav-link" href="{% url 'suggest' %}">Suggest</a>
         </li>
         <li {% if 'past' in request.path %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-          <a class="nav-link" href="#">Past</a>
+          <a class="nav-link" href="{% url 'past' %}">Past</a>
         </li>
         {% if request.user.is_authenticated %}
           <li class="nav-item">

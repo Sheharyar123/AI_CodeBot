@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+{% block title %}Past{% endblock title %}
+
+{% block content %}
+
+{% for record in records %}
+
+<p class="mt-4 mb-2">Question: {{ record.question }}</p>
+<pre style="margin-bottom: 30px" class="line-numbers">
+<code class="language-{{ record.language|lower }}">
+{{ record.response }}
+</code>
+</pre>
+
+<a href="{% url 'delete' record.id %}" class="btn btn-warning">Delete</a>
+
+{% empty %}
+
+<h4 class="mt-4">You don't have any past record</h4>
+
+{% endfor %}
+
+{% endblock content %}
