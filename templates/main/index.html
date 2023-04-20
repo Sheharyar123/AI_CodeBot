@@ -30,9 +30,13 @@ else:
     <option value={{ lang }}>{{ lang|upper }}</option>
     {% endfor %}
     </select>
-    <button class="btn btn-secondary" style="margin-top: 20px" type="submit">
-    Submit
-    </button>
+    {% if request.user.is_authenticated %}
+        <button class="btn btn-secondary" style="margin-top: 20px" type="submit">
+        Submit
+        </button>
+    {% else %}
+        <a href="{% url 'account_login' %}" class="btn btn-secondary" style="margin-top: 20px">Login</a>
+    {% endif %}
 </form>
 
 
