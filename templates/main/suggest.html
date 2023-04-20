@@ -3,46 +3,39 @@
 
 {% block content %} 
 
-{% if code %}
 
-<pre style="margin-bottom: 30px">
-<code class="line-numbers language-{{ lang|lower }}">
-{{ code }}
+<pre style="margin-bottom: 30px" class="line-numbers">
+<code class="language-python" id="new_code">
+if age == 18:
+    print('You can drink beer')
+else:
+    print('Grow up boy')
 </code>
 </pre>
 
-{% else %}
 
-<pre style="margin-bottom: 30px">
-    <code class="line-numbers language-python">
-    if age == 18:
-        print('You can drink beer')
-    else:
-        print('Grow up boy')
-    </code>
-</pre>
 
-{% endif %}
-
-<form method="POST" action="{% url 'suggest'%}">
+<form method="POST" action="" id="suggest_form">
     {% csrf_token %}
     <div class="mb-3">
     <textarea
         name="code"
         class="form-control"
-        placeholder="Tell AI to suggest code for you..."
+        placeholder="Tell AI to suggest code for you...&#10;e.g. Write a code for Tick Tack Toe game in python"
         rows="3"
+        id="suggest_code"
     ></textarea>
     </div>
-    <select class="form-select" name="lang">
+    <select class="form-select" name="lang" id="suggest_lang">
     <option selected>Select Programming Language</option>
     {% for lang in lang_list %}
     <option value={{ lang }}>{{ lang|upper }}</option>
     {% endfor %}
     </select>
-    <button class="btn btn-secondary" style="margin-top: 20px" type="submit">
+    <button class="btn btn-secondary mb-2" style="margin-top: 20px" type="submit">
     Submit
     </button>
+    <input type="hidden" value="{% url 'suggest' %}" id="url" />
 </form>
 
 

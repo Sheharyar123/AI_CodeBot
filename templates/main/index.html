@@ -3,28 +3,17 @@
 
 {% block content %} 
 
-{% if code %}
-
-<pre style="margin-bottom: 30px">
-<code class="line-numbers language-{{ lang|lower }}">
-{{ code }}
+<pre style="margin-bottom: 30px" class="line-numbers">
+<code class="language-python" id="new_code">
+if day == 'Monday':
+    print('I will go to the park.')
+else:
+    print('I will stay at home.')    
 </code>
 </pre>
 
-{% else %}
 
-<pre style="margin-bottom: 30px">
-    <code class="line-numbers language-python">
-    if age == 18:
-        print('You can drink beer')
-    else:
-        print('Grow up boy')
-    </code>
-</pre>
-
-{% endif %}
-
-<form method="POST" action="{% url 'index'%}">
+<form method="POST" action="{% url 'index'%}" id="main-form">
     {% csrf_token %}
     <div class="mb-3">
     <textarea
@@ -32,9 +21,10 @@
         class="form-control"
         placeholder="Tell AI to fix code for you..."
         rows="3"
+        id="code"
     ></textarea>
     </div>
-    <select class="form-select" name="lang">
+    <select class="form-select" name="lang" id="lang">
     <option selected>Select Programming Language</option>
     {% for lang in lang_list %}
     <option value={{ lang }}>{{ lang|upper }}</option>

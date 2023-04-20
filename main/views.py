@@ -1,5 +1,5 @@
 import openai
-from django.contrib import messages
+from django.http import JsonResponse
 from django.conf import settings
 from django.shortcuts import render
 from django.views.generic import View
@@ -12,18 +12,16 @@ class HomePageView(View):
         return render(request, "main/index.html", context)
 
     def post(self, request, *args, **kwargs):
-        code = request.POST.get("code")
-        lang = request.POST.get("lang")
+        if request.headers.get("x-requested-with") == "XMLHttpRequest":
+            code = request.POST.get("code")
+            lang = request.POST.get("lang")
 
-        if lang == "Select Programming Language":
-            print(lang)
-            messages.warning(request, "You forgot to select a language")
+            if lang == "Select Programming Language":
+                return JsonResponse({"status": "failed"})
 
-        else:
-            openai.api_key = settings.API_KEY
-            # # Create OpenAI Instance
-            # openai.Model.list()
             try:
+                openai.api_key = settings.API_KEY
+
                 # Call the API
                 response = openai.Completion.create(
                     model="text-davinci-003",
@@ -35,13 +33,11 @@ class HomePageView(View):
                     presence_penalty=0.0,
                 )
                 code = response["choices"][0]["text"].strip()
-                print(code)
+                return JsonResponse({"status": "success", "code": code})
             except Exception as e:
-                print(e)
-
-        context = {"code": code, "lang": lang, "lang_list": lang_list}
-
-        return render(request, "main/index.html", context)
+                return JsonResponse({"status": "failed"})
+        else:
+            return render(request, "main/index.html")
 
 
 class SuggestView(View):
@@ -50,33 +46,29 @@ class SuggestView(View):
         return render(request, "main/suggest.html", context)
 
     def post(self, request, *args, **kwargs):
-        code = request.POST.get("code")
-        lang = request.POST.get("lang")
+        if request.headers.get("x-requested-with") == "XMLHttpRequest":
+            code = request.POST.get("code")
+            lang = request.POST.get("lang")
 
-        if lang == "Select Programming Language":
-            print(lang)
-            messages.warning(request, "You forgot to select a language")
+            if lang == "Select Programming Language":
+                return JsonResponse({"status": "failed"})
 
-        else:
-            openai.api_key = settings.API_KEY
-            # # Create OpenAI Instance
-            # openai.Model.list()
             try:
+                openai.api_key = settings.API_KEY
                 # Call the API
                 response = openai.Completion.create(
                     model="text-davinci-003",
                     prompt=f"Suggest code in {lang} for {code}. Just respond with code",
-                    temperature=0,
-                    max_tokens=1000,
+                    temperature=0.5,
+                    max_tokens=1500,
                     top_p=1,
                     frequency_penalty=0.0,
                     presence_penalty=0.0,
                 )
+                print(response)
                 code = response["choices"][0]["text"].strip()
-                print(code)
+                return JsonResponse({"status": "success", "code": code})
             except Exception as e:
-                print(e)
-
-        context = {"code": code, "lang": lang, "lang_list": lang_list}
-
-        return render(request, "main/suggest.html", context)
+                return JsonResponse({"status": "failed"})
+        else:
+            return render(request, "main/suggest.html")
