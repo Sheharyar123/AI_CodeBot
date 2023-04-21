@@ -35,4 +35,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     def __str__(self):
-        return self.name
+        if self.name:
+            return self.name
+        else:
+            return self.email

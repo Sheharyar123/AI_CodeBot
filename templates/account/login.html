@@ -1,5 +1,5 @@
 {% extends 'account/base.html' %}
-
+{% load socialaccount %}
 {% block head_title %}Login{% endblock head_title %}
 
 {% block content %}
@@ -30,11 +30,11 @@
               <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
             </div>
   
-            <a class="btn btn-lg btn-block mb-2 social-btn" href="#!"
+            <a class="btn btn-lg btn-block mb-2 social-btn" href="{% provider_login_url 'microsoft' %}"
               role="button">
               <i class="fab fa-microsoft me-2"></i>Continue with Microsoft
             </a>
-            <a class="btn btn-lg btn-block social-btn" href="#!"
+            <a class="btn btn-lg btn-block social-btn" href="{% provider_login_url 'google' %}"
               role="button">
               <i class="fab fa-google me-2"></i>Continue with Google</a>
           </form>

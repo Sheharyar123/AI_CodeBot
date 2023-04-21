@@ -24,6 +24,11 @@
             <!-- Submit button -->
             <button type="submit" class="btn btn-primary btn-lg btn-block" style="width: 100%">Sign Up</button>
           </form>
+          {% for error in form.errors %}
+            {{ error }}
+          {% endfor %}
+
+
         </div>
       </div>
     </div>
